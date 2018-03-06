@@ -1,0 +1,164 @@
+\documentclass[12pt]{article}
+\usepackage{cite}
+\usepackage{indentfirst}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\title{Volunteer Connector - Implementation 1}
+\author{Daniel Domme (onid: dommed), \\
+Charles Koll (onid: kollch), \\
+Pedro Autran e Morais (onid: autranep), \\
+Coulby Nguyen (onid: nguyenco), \\
+Pavel Shonka (onid: shonkap)
+}
+\date{05 March 2018}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\pagebreak
+\section{Product Release}
+\subsection{URL}
+	The current state of the website can be downloaded and tried at:
+
+	https://github.com/kollch/volunteerconnector/tree/develop
+
+	It can also be accessed live at the following URL:
+
+	http://ec2-18-218-108-99.us-east-2.compute.amazonaws.com/
+\subsection{Setting Up}
+	Functionality with the database had not been completed yet, and some basic
+	functionalities like registering are awaiting this implementation in
+	order for completion.
+
+	To run the node.js web server to serve up the web page resources:
+\begin{enumerate}
+\item
+	Node.js must be installed. Go to https://nodejs.org/ to download and
+		install the software.
+\item
+	Open bash or putty in the volunteerconnector folder and type "npm install
+		express mysql".
+\item
+	Type "npm start". The server should now be running on port 3000 by default.
+\item
+	Open up your web browser and type "http://localhost:3000/". Change the port
+		according to the port that you chose to use. The website should now
+		be up and running.
+\end{enumerate}
+\section{User Story}
+	Pavel and Coulby began the Home page. Getting the home page to work correctly on
+	different screen sizes has been a big issue and it is still not fixed. Also
+	getting all the different parts of the website to look how we wanted has been a
+	hard problem to overcome. The website is coming along slower than anticipated
+	and therefore has taken more than 3 days so far. It is continuously tested
+	but has yet to be fully implemented as some of the tasks have taken longer than
+	expected. A major part of the website has yet to be completed. The spike diagrams
+	helped to break the tasks into smaller parts and help assign them to people to
+	complete. For the homepage the UML sequence has yet to be really useful as it
+	is mostly just formatting the home page to look good. The UML sequence should be
+	more helpful on the login page.
+
+	Daniel, Charles, and Pedro are working on the database and where to host it.
+	The major issue is that the server where we first started hosting the
+	website couldn't access the information in the database due to permissions.
+	Hopefully moving it to another host will fix this issue but so far that has been
+	the biggest issue with the database other than getting familiar with the
+	language again as well. Due to that issue it is going slower than predicted also
+	and has taken more than three days as well. The diagrams we made for the
+	database have been fairly sufficient so far. This part has not been tested nor
+	implemented beyond just the basics so far. It has a lot left to be finished as
+	just the database has been setup so far to this point. The UML diagram helps to
+	figure out what subsystems we need and exactly where the data needs to be sent
+	and when it needs to be received. The spike diagram wasn't really helpful as
+	we didn't really split the database into smaller subprojects so the spike is
+	mostly useless but the group communicates well enough that this has yet to be
+	an issue.
+
+	Daniel is working on the pop-ups, and did not have any issues with that part. The
+	diagrams were helpful in showing what was needed for input boxes. This part was
+	finished quickly and easily, taking only a few hours.
+\section{Tests}
+\subsection{Unit Test for One Existing Component}
+	Unit tests were implemented for major existing components using HtmlUnit
+	along with JUnit to test filling out fields in the html and testing the css. A
+	Firefox browser was emulated for the unit test.
+
+	For testing of the task of filling out the charity registration form,
+	the DOM tree was traversed to find specific elements in the charity
+	registration popup by selecting register, then charity registration, and
+	our charity registration form was filled out using a test case. CSS selectors
+	were also checked, and assertions were used to test that the correct items were
+	selected and filled in.
+\subsection{Unit Test for Major Existing User Story}
+	The user story "Register Popup" was tested. The user story task was "There
+	will be a pop up with form to input information for a new account." HtmlUnit
+	was once again used to write a test case that traversed the DOM from index.html
+	to get to and select the register button. Then, settings for the popup and DOM
+	elements were asserted to test the state of webpage.
+\subsection{Unit Test for Not Yet Implemented Part of the System}
+	Currently, our team is designing our database and have yet to implement it. The
+	unit tests that we are planning on conducting consist of using node.js with
+	sameple data and queries written in javascript. The server will be loaded with
+	information and asked to return queries which will then be tested for
+	accuracy. Incorrect inputs for username and password will be tested. Along with
+	this, duplications of usernames and passwords will be tested for in
+	registration. The ability to add to the database and delete from it will be
+	tested. Empty fields will be tested for usernames and passwords. The use
+	of characters and long strings and text will be tested for in saving to the
+	database and then queried for.
+\section{Design changes and rationale}
+	No questions were asked of the customer. All tasks seemed manageable and
+	clear to the development team.
+
+	There have been no major changes in the design of the website yet. There have
+	been issues with hosting and connecting the database to the website. Rehosting
+	of the database is nearing completion, and it seems as if connectivity
+	between the web server and the database is working. One thing that was not
+	implemented was the error pop up for a nonexistent user. This feature will be
+	implemented early next week on 06 March 2018.
+\section{Meeting Report}
+\subsection{Plan for Next Week}
+	Next week, our team needs to complete the following tasks: user not found
+	error pop up, interface between the database and the website, functionality of
+	charities to post events, ability to search and filter event posts,
+	functionality to select a single event post, ability for a volunteer to click
+	on the apply button and let the charity know they are interested in
+	helping, search events using distance slider to find posts near the user's
+	location functionality, showing the volunteer their current event sign-ups,
+	having recent posts show up first on the homepage, a homepage button, an about
+	page for information on the website and how to use it, a list of older posts
+	displayed on the homepage after the most recent posts, and organizational page
+	for charities. We plan on finishing up the remainder of the site next week.
+\subsection{What We Accomplished this Week}
+	This week, the development team completed the register and login pop-ups and
+	some of the home page functionality. Most of the user stories were completed on
+	time. The node.js web server was also completed, and newest posts are displayed
+	at the top in little boxes. We have started implementing the database by
+	fleshing out the scheme and implementing this into tables. The database server has
+	also been connected to the web server, but interface between the two servers
+	still needs to be completed.
+\subsection{Customer Interaction}
+	The customer was willing to meet with the development team this week, and they
+	were able to help with design questions. The customer was also very reasonable in
+	assigning tasks to be completed.
+
+\quad
+
+\subsection{Contributions}
+\begin{itemize}
+\item
+	Daniel Domme: Charity and volunteer registration pop up forms, sign-in form, unit
+		tests, program instructions
+\item
+	Charles Koll: Implementation of the database, server hosting, Latex document compilation
+\item
+	Pedro Morais: Worked on server, hosting on AWS, readme
+\item
+	Coulby Nguyen: Worked on creating user stories, and implemented two of
+		the stories, including the homepage and the user interface for a
+		charity to add information to create a post.
+\item
+	Pavel Shonka: Worked on home page, wrote up user stories
+\end{itemize}
+\end{document}
