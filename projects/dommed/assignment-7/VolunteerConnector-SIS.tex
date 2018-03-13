@@ -1,0 +1,279 @@
+\documentclass[12pt]{article}
+\usepackage{cite}
+\usepackage{indentfirst}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{graphicx}
+\title{Volunteer Connector - Implementation 2}
+\author{Daniel Domme (onid: dommed), \\
+Charles Koll (onid: kollch), \\
+Pedro Autran e Morais (onid: autranep), \\
+Coulby Nguyen (onid: nguyenco), \\
+Pavel Shonka (onid: shonkap)
+}
+\date{12 March 2018}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\pagebreak
+\section{Product Release}
+	The website can currently be accessed live at:
+
+	http://web.engr.oregonstate.edu/~kollch/volunteerconnector/
+
+	\quad
+
+	The code and instructions for hosting the website can be found at:
+
+	https://github.com/kollch/volunteerconnector
+\section{User Story}
+\begin{itemize}
+\item
+	The Database Interface user stary was implemented by both Daniel and Charles.
+	Initially the interface was going to be using the MySQL module with a
+	Node.Js server, but complications arose on implementation and
+	we migrated the server code from Node.Js to PHP. The two worked together
+	using paired programming at the same time to come to a successful
+	solution. The user story was implemented and tested. The class diagram
+	and database schema diagram were both useful documents in completing the server.
+\item
+	The Home Button user story has been completed by Daniel. Pairs were not used to
+	implement this story. The Home button is implemented and tested. The
+	task took one day to complete. One problem that was encountered was the
+	transition from Node.Js to PHP. The file extensions for the CSS and
+	Javascript had to be changed. The spike was useful in completing this
+	task, and the mockups were also helpful in making this page.
+\item
+	The Event info user story was implemented by Coulby and Charles. The layout
+	and design of the posts was completed by Coulby. The querying of the database was
+	done by Charles. A problem that was run into was fields in the post not matching
+	the table in the database. This was fixed by editing the post to match the
+	database. The implementation took one week to complete. The user story was
+	helpful in helping us to know what needs to be done. Also, the class diagram was
+	helpful in determining what was going to be in the database and the webpage.
+\item
+	The Filter query user story was implemented by Pedro. Pairs were not used for
+	this story. The task required 2 days to complete. The task was implemented and
+	tested. There were no problemn in implementing this into the website. While not
+	a fixed search bar with advanced search, the current state of the filter query
+	passes the requirements.
+\item
+	The Looking at 1 specific post user story was completed by Coulby. The story
+	still needs to be completely incorporated into the website when a user clicks
+	on a post. The page also needs to pull data from the database. This
+	feature will continue to be worked on and so far has taken two days to
+	complete. A problem that we have run into is being able to query the
+	database properly. No documents were of particular use for this task. Some
+	work by Charles may be needed to complete this.
+\item
+The Post information (searchable keywords) user story was partially completed
+	by Pedro. The search looks at the posts in the HTML and finds matching
+	information. Only matching posts are displayed. The functionality needs
+	to be extended into the database to search all posts available. This
+	user story has taken two days so far and will be continually worked
+	on until complete. The mockups document was very helpful for this
+	user story.
+\item
+	The Volunteer Button user story has not been completed. This feature is
+	considered a convenience function by the customer and is of lower
+	priority than outstanding features as of now. If time affords completion
+	of this feature, the team might be able to work on it next week.
+\item
+	The Search distance user story has not been completed. While the customer
+	considers this feature to be important, the implementation of
+	other incomplete features has higher priority. Authorization has
+	been obtained to delay the implementation of this until the database
+	is completely hooked up.
+\item
+	The Looking at user events user story is on the same level of priority and status
+	as the volunteer button user story. The customer is willing to wait for
+	this feature to be completed. This feature is also dependent on the
+	volunteer button.
+\item
+	The Recent posts (appear on front page) user story was implemented by
+	Coulby. This task took one week, but it is not completely finished. The
+	recent posts still need to be pulled from the database and then rendered.
+	There is currently the problem of creating new DOM elements with imported data.
+	The most recent posts are placeholders for the final version of the site. The
+	mockups that were made for this site were very helpful in the completion of this
+	feature.
+\item
+	The About user story was completed by Coulby. This task took two days. There
+	were no issues in creating this feature. This task has been implemented and
+	tested. The user stories were helpful in making this task on time and to
+	requirements.
+\item
+	The Other posts user story has been changed by the customer to be similar to the
+	recent posts user story. All displayed posts will not be in the same format.
+	The amount of displayed posts still needs to be decided on.
+\item
+	The Login popup user story was completed by Daniel. The task took two days. The
+	only thing left to do is create a session in PHP and actually log the user in.
+	This will be done by Charles and Daniel. There have been no major issues in
+	doing this feature, and the feature is implemented.
+\item
+	The Organization info user story still needs to be completed. The customer has
+	agreed to put this feature on hold until other features have been completed.
+	This feature is not a necessity to run. Until this feature is implemented, users
+	will be linked to the Charities' websites.
+\end{itemize}
+\section{Design Changes and Rationale}
+\subsection{Customer Questions}
+	Questions asked to the customer revolved around the requirements and
+	timetables of the project. The customer was available for questioning and was
+	very helpful. Some questions were:
+\begin{itemize}
+\item
+	Are you willing to put off the implementation of the charity organization page,
+	distance search feature, the volunteer button, and the user volunteer display?
+	\begin{itemize}
+	\item
+		The customer said yes to all
+	\end{itemize}
+\item
+	Our team thinks that it might be better to merge the older posts into the
+	recent post format. What are your thoughts?
+	\begin{itemize}
+	\item
+		The customer said that they think that it is a good idea. This will
+		look better and be less confusing.
+	\end{itemize}
+\end{itemize}
+\subsection{Design Changes}
+	The server for the website was originally writted in Node.Js. We had trouble
+	connecting Node.Js to our database, which is being developed by Charles, as he
+	does not know Node.Js very well which made it hard for us to troubleshoot the
+	server code with the database. To make it so the server team and the database
+	team could collaborate more easily, we switched the backend specification to
+	use PHP instead. Switching to PHP also made it so we could serve the website
+	directly on the OSU Flip server, which negated the need to host on Amazon Web
+	Services.
+
+	We also changed the design of the navigation bar, because the original nav bar
+	made it hard to format the register, login and search bars. The new navigation
+	bar includes a home button, which was one of our user stories, and also links to
+	an account and an about page. This was a natural way to incorporate our
+	user account user story. Our "about" design and user story originally had an
+	about section on the main landing page, but we decided that with the navigation
+	bar it was more natural to give it its own subpage and link, which also freed up
+	space on the front page which we believe will lead to a better user interface and
+	execution for other user stories, like the "recent posts" and "other posts" user
+	stories.
+
+	Another change was the merge of the older post display format into the same
+	format as the recent posts. This reason for this was partially time and partially
+	design. The recent post looks far better. This was done with the consent of the
+	customer.
+
+	A few requirement changes were the implementation of the volunteer button,
+	the user event info, organization info page, and the search distance were all
+	lowered in priority and the implementation has been put off until more
+	important features are completed. This was done after the customer was spoken
+	to and a reappraisal was completed. Ultimately, the customer agreed to the
+	changes.
+\subsection{User Story Changes}
+\begin{itemize}
+\item
+	New Story: implement database that the website pulls data from. Task time: 1
+	week. Priority: top.
+\item
+	Older Story Priority Change: volunteer button. Task time: 3 days. New Priority:
+	low/bottom
+\item
+	Older Story Priority Change: organization info page. Task time: 3 days. New
+	Priority: low/bottom
+\item
+	Older Story Priority Change: search distance. Task time: 3 days. New Priority:
+	low/bottom
+\item
+	Older Story Priority Change: volunteer's events. Task time: 3 days. New Priority:
+	low/bottom
+\end{itemize}
+\section{Refactoring}
+	During the programming of this project, the team did several refactors. One
+	major one was changing from tabs to two spaces for the indentation of the
+	code. Previously, the code was a mess and hard to read. A second refactoring
+	was to make different support files for pages. For example: index.php has
+	style.css and index.js, but account.php has style2.css and account.js. This
+	made it easier to know which code affected what and made the pages more modular.
+\section{Tests}
+	During integration of new features into the existing code, we tested our code
+	using some basic unit tests. With the help of PHPUnit and the Eclipse IDE, inputs
+	for fields in forms for adding to the database were tested. Abnormally long
+	strings of characters were tested along with special characters. In
+	reality, we do not expect the users to enter anything unusual into the code. We
+	did not have any major errors. One place that we did notice a slight bug was
+	submitting half-filled forms. We found out that we needed to not allow the user
+	to submit without a complete form filled out otherwise there were errors in
+	searching the database. We will implement checks in either Javascript or the
+	PHP query of the SQL database to find and reprompt the user.
+
+	For testing the database, we simply made a simple Javascript program using
+	Node.js with many data queries adding to and requesting from the database. The
+	strings to input into the database were formed using random string generators
+	of varying lengths. Then we output the status of the queries and the data in the
+	database to test the functionality. Errors output threw exceptions. One
+	input is as follows:
+\begin{lstlisting}
+var sql = "INSERT INTO user (username, password)
+           VALUES ('Ted Kazynkski', 'airforce1')";
+con.query(sql, function (err, result) {
+  if (err) throw err;
+    console.log("1 record inserted");
+});
+\end{lstlisting}
+
+	Another test on the database was searching the tables for entries. After
+	randomly populating the tables, random strings were used to search the database
+	along with the same strings that populated the database. The output of the
+	queries and errors were printed to the console for the user to discern. An example
+	of a search of the database is:
+\begin{lstlisting}
+con.query("SELECT * from user WHERE username = 'Francis221'",
+function (err, result) {
+  if (err) throw err;
+    console.log(result);
+});
+\end{lstlisting}
+
+	These tests were run on most parts of the database schema. There were no major
+	issues found.
+\section{Meeting Report}
+	Next week, our group plans to finish all features of the website. This
+	includes the addition of the user stories for the volunteer button, charity
+	info page, volunteer events saved, and the distance search. In addition, the full
+	implementation of features such as pulling events from the database will be
+	done. This should take no more than a week to finish up.
+
+	This week, the team finished the about page, hooked up the database to the
+	site, implemented a search feature, and made individual event pages. Also, a
+	slideshow will be completed for the team presentation of our software. We also
+	spoke with the customer on delaying several features until next week.
+
+	During this part of the project, the customer was willing to meet with the team
+	and make changes to the requirements. The customer was very reasonable and
+	forgiving for the backlog of features.
+
+\quad
+
+\subsection{Contributions}
+\begin{itemize}
+\item
+	Daniel Domme: Worked on the defunct Node.Js, Javascript and HTML for the
+	homepage and account page, and assignment 7 writeup.
+\item
+	Charles Koll: LaTeX document compilation, database implementation, PHP
+	(queries database and passes results to Javascript)
+\item
+	Pedro Morais: Design changes, user stories, search bar 
+\item
+	Coulby Nguyen: Worked on what the home page, about page, account page, and
+	the single post page should look like, then wrote the Javascript function
+	code for dynamically creating the page so the event posts are based on
+	information from the database.
+\item
+	Pavel Shonka: Example posts and part of slide show
+\end{itemize}
+\end{document}
